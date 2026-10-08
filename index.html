@@ -7,24 +7,16 @@
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#fff;color:#000;font-family:Arial,"Noto Sans KR",sans-serif}
-.container{max-width:520px;margin:auto;padding:28px 22px;min-height:100vh}
+.container{max-width:520px;margin:auto;padding:28px 22px;min-height:100vh;display:flex;flex-direction:column}
 .date{font-size:20px;font-weight:bold;margin-bottom:8px}
 h1{font-size:32px;margin:0 0 28px}
-.list{margin-bottom:28px}
+.list{flex:1}
 .task{display:flex;align-items:center;gap:14px;border-bottom:2px solid #000;padding:17px 4px}
 .task input[type=checkbox]{width:25px;height:25px;accent-color:#000;flex-shrink:0}
 .task input[type=text]{border:0;outline:0;width:100%;font-size:21px;color:#000;background:#fff}
 .task input[type=text]::placeholder{color:#888}
 .task.done input[type=text]{text-decoration:line-through;color:#888}
-.message{border-top:2px solid #000;padding:20px 0;text-align:center;font-size:18px;font-weight:bold;line-height:1.5}
-.calculator{border-top:2px solid #000;margin-top:25px;padding-top:22px}
-.calculator h2{font-size:24px;margin:0 0 18px}
-.input-box{margin-bottom:14px}
-.input-box label{display:block;font-size:16px;font-weight:bold;margin-bottom:7px}
-.input-box input{width:100%;padding:13px;border:2px solid #000;font-size:18px;outline:none}
-.result{margin-top:18px;padding:18px;text-align:center;background:#f5f5f5}
-.result span{display:block;font-size:16px;margin-bottom:6px}
-.result strong{font-size:28px}
+.message{border-top:2px solid #000;margin-top:28px;padding-top:20px;text-align:center;font-size:18px;font-weight:bold;line-height:1.5}
 @media(max-width:400px){
 .container{padding:22px 18px}
 h1{font-size:28px}
@@ -40,25 +32,6 @@ h1{font-size:28px}
   <div class="list" id="list"></div>
 
   <div class="message" id="message"></div>
-
-  <div class="calculator">
-    <h2>모임 회비 나누기</h2>
-
-    <div class="input-box">
-      <label for="total">총 금액 (원)</label>
-      <input id="total" type="number" min="0" placeholder="예: 120000">
-    </div>
-
-    <div class="input-box">
-      <label for="people">인원</label>
-      <input id="people" type="number" min="1" step="1" placeholder="예: 6">
-    </div>
-
-    <div class="result">
-      <span>1인당 금액</span>
-      <strong id="result">0원</strong>
-    </div>
-  </div>
 </div>
 
 <script>
@@ -127,21 +100,6 @@ function dailyMessage(){
   document.getElementById("message").textContent=
     "“"+messages[((day%messages.length)+messages.length)%messages.length]+"”";
 }
-
-function calculate(){
-  const total=Number(document.getElementById("total").value);
-  const people=Number(document.getElementById("people").value);
-  const result=document.getElementById("result");
-
-  if(total>0 && people>0){
-    result.textContent=Math.round(total/people).toLocaleString()+"원";
-  }else{
-    result.textContent="0원";
-  }
-}
-
-document.getElementById("total").addEventListener("input",calculate);
-document.getElementById("people").addEventListener("input",calculate);
 
 today();
 load();
