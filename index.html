@@ -3,193 +3,221 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>이유민 TO-DO LIST</title>
+<title>이유민 | Mobile Card</title>
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#fff;color:#000;font-family:Arial,"Noto Sans KR",sans-serif}
-.container{max-width:520px;margin:auto;padding:28px 22px;min-height:100vh;display:flex;flex-direction:column}
-
-/* 상단 영역: 날짜 & 시간 */
-.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:38px}
-.date{font-size:24px;font-weight:700;letter-spacing:normal}
-.time{font-size:24px;font-weight:700;letter-spacing:normal;font-variant-numeric:tabular-nums}
-
-/* 메인 행: align-items: center로 문구와 퍼센트를 완벽히 세로 중앙 일직선 맞춤 */
-.title-row{display:flex;align-items:center;justify-content:space-between;margin:0 0 28px}
-
-/* 응원 문구 */
-.greeting{font-size:18px;font-weight:500;margin:0;line-height:1;color:#222}
-
-.percent-wrap{position:relative;text-align:right;flex-shrink:0;display:flex;align-items:center}
-
-/* Clear! 문구: absolute로 공중에 띄워 높이에 영향 없음 */
-.clear{
-  position:absolute;
-  bottom:100%;
-  right:0;
-  font-size:12px;
-  font-weight:bold;
-  margin-bottom:4px;
-  white-space:nowrap;
-  display:none;
+:root{
+  --main:#ffffff; /* 메인 글자 및 테두리 색상: 흰색 */
+  --bg:#00CCFF;   /* 전체 배경 색상: 하늘색 */
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:Arial,"Noto Sans KR",sans-serif;
+  background:var(--bg);
+  color:var(--main);
+  min-height:100vh;
+}
+.card{
+  min-height:100vh;
+  max-width:480px;
+  margin:auto;
+  padding:42px 28px 40px;
+  display:flex;
+  flex-direction:column;
+}
+.top{padding-bottom:35px}
+.label{
+  font-size:15px;
+  font-weight:700;
+  letter-spacing:2px;
+  margin-bottom:18px;
+}
+h1{
+  font-size:48px;
+  line-height:1.05;
+  letter-spacing:-3px;
+  margin-bottom:18px;
+}
+.intro{
+  font-size:20px;
+  line-height:1.55;
+  font-weight:500;
+  letter-spacing:-1px;
+}
+.work{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  margin-bottom:35px;
+}
+.work-title{
+  font-size:15px;
+  font-weight:700;
+  letter-spacing:2px;
+  margin-bottom:8px;
+}
+.work-item{
+  border-top:2px solid var(--main);
+  padding:18px 4px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.work-item span{
+  font-size:27px;
+  font-weight:700;
+  letter-spacing:-1.5px;
+}
+.arrow{
+  font-size:25px;
 }
 
-/* 퍼센트: line-height:1로 높이 여백 제거 */
-.percent{font-size:26px;font-weight:bold;line-height:1}
+/* 모임 회비 계산기 스타일 */
+.calc-section{
+  border-top:2px solid var(--main);
+  padding-top:25px;
+  margin-bottom:30px;
+}
+.calc-title{
+  font-size:15px;
+  font-weight:700;
+  letter-spacing:2px;
+  margin-bottom:16px;
+}
+.calc-box{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.input-group{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.input-group label{
+  font-size:14px;
+  font-weight:600;
+}
+.input-group input{
+  width:100%;
+  padding:12px;
+  border:2px solid var(--main);
+  border-radius:8px;
+  background:transparent;
+  color:var(--main);
+  font-size:16px;
+  outline:none;
+}
+.input-group input::placeholder{
+  color:rgba(255,255,255,0.6);
+}
+.calc-btn{
+  margin-top:6px;
+  padding:14px;
+  border:2px solid var(--main);
+  background:var(--main);
+  color:var(--bg);
+  font-size:16px;
+  font-weight:700;
+  border-radius:8px;
+  cursor:pointer;
+}
+.calc-btn:active{transform:scale(.98)}
+.calc-result{
+  margin-top:14px;
+  padding:16px;
+  border:2px solid var(--main);
+  border-radius:8px;
+  text-align:center;
+  font-size:18px;
+  font-weight:700;
+  background:rgba(255,255,255,0.1);
+}
 
-.progress{height:8px;background:#eee;margin-top:-18px;margin-bottom:18px;overflow:hidden}
-.progress-bar{height:100%;width:0;background:#000;transition:width .3s ease}
-.list{flex:1}
-.task{display:flex;align-items:center;gap:14px;border-bottom:2px solid #000;padding:17px 4px}
-.task input[type=checkbox]{width:25px;height:25px;accent-color:#000;flex-shrink:0}
-.task input[type=text]{border:0;outline:0;width:100%;font-size:21px;color:#000;background:#fff}
-.task input[type=text]::placeholder{color:#888}
-.task.done input[type=text]{text-decoration:line-through;color:#888}
-.message{border-top:5px solid #000;margin-top:-2px;padding-top:20px;text-align:center;font-size:18px;font-weight:900;line-height:1.2;white-space:nowrap}
-@media(max-width:400px){
-.container{padding:22px 18px}
-.date,.time{font-size:20px}
-.greeting{font-size:16px}
-.percent{font-size:22px}
-.task input[type=text]{font-size:19px}
-.message{font-size:16px}
+.contact{
+  margin-top:auto;
+  width:100%;
+  padding:20px;
+  border:2px solid var(--main);
+  background:transparent;
+  color:var(--main);
+  font-size:20px;
+  font-weight:700;
+  cursor:pointer;
+  border-radius:14px;
+}
+.contact:active{transform:scale(.98)}
+
+@media(max-width:360px){
+  h1{font-size:42px}
+  .intro{font-size:18px}
+  .work-item span{font-size:23px}
 }
 </style>
 </head>
 <body>
-<div class="container">
+<main class="card">
+  <section class="top">
+    <div class="label">MOBILE BUSINESS CARD</div>
+    <h1>이유민</h1>
+    <p class="intro">경기대학교 경영학과 학생<br>아이디어를 서비스와 디자인으로 연결합니다.</p>
+  </section>
 
-  <!-- 상단: 날짜 & 시각 -->
-  <div class="top">
-    <div class="date" id="date"></div>
-    <div class="time" id="time"></div>
-  </div>
-
-  <!-- 메인 위치: 응원 문구 & 퍼센트 (완벽한 세로 중앙 일직선) -->
-  <div class="title-row">
-    <div class="greeting">이유민님 오늘 하루도 파이팅입니다.</div>
-    <div class="percent-wrap">
-      <div class="clear" id="clear">Clear!</div>
-      <div class="percent" id="percent">0%</div>
+  <section class="work">
+    <div class="work-title">WHAT I DO</div>
+    <div class="work-item">
+      <span>AI 서비스 기획</span>
+      <span class="arrow">→</span>
     </div>
-  </div>
+    <div class="work-item">
+      <span>웹디자인</span>
+      <span class="arrow">→</span>
+    </div>
+    <div class="work-item">
+      <span>내면탐구</span>
+      <span class="arrow">→</span>
+    </div>
+  </section>
 
-  <div class="progress">
-    <div class="progress-bar" id="progressBar"></div>
-  </div>
+  <!-- 모임 회비 나누기 계산기 -->
+  <section class="calc-section">
+    <div class="calc-title">DUTCH PAY CALCULATOR</div>
+    <div class="calc-box">
+      <div class="input-group">
+        <label for="totalAmount">총 금액 (원)</label>
+        <input type="number" id="totalAmount" placeholder="예: 50000" min="0">
+      </div>
+      <div class="input-group">
+        <label for="personCount">인원수 (명)</label>
+        <input type="number" id="personCount" placeholder="예: 4" min="1">
+      </div>
+      <button class="calc-btn" onclick="calculateSplit()">1인당 금액 계산하기</button>
+      <div class="calc-result" id="resultText">금액과 인원을 입력해 주세요</div>
+    </div>
+  </section>
 
-  <div class="list" id="list"></div>
-
-  <div class="message" id="message"></div>
-
-</div>
+  <button class="contact" onclick="contact()">문의하기</button>
+</main>
 
 <script>
-const STORAGE_KEY="yumin_todo_list_v3";
+function calculateSplit(){
+  const total = parseFloat(document.getElementById('totalAmount').value);
+  const people = parseInt(document.getElementById('personCount').value);
+  const resultElement = document.getElementById('resultText');
 
-const messages=[
-"오늘 한 일이 내일의 나를 만든다.",
-"자존감은 내가 한 약속을 지키는 것에서 온다.",
-"계속하면 결국 원하는 곳에 도착한다.",
-"오늘 할 일을 내일 할 일이 아니다.",
-"미래의 나에게 가장 좋은 선물은 오늘의 실행이다.",
-"그냥 해라.",
-"이제는 천천히 가면 큰일 난다.",
-"뭐가 제일 우선인지 잊지 마라.",
-"너 졸업할 거냐?",
-"지금의 한 걸음이 원하는 미래와 가장 가깝다.",
-"어설프게 공부하고 나에게 취하지 말자.",
-"원래 공부=멘헤라는 항등식이다."
-];
+  if(isNaN(total) || isNaN(people) || total <= 0 || people <= 0){
+    resultElement.innerText = "올바른 금액과 인원을 입력해 주세요.";
+    return;
+  }
 
-function updateDateTime(){
-  const d=new Date();
-  const days=["일","월","화","수","목","금","토"];
-
-  document.getElementById("date").textContent=
-    `${d.getFullYear()}년 ${d.getMonth()+1}월 ${d.getDate()}일 (${days[d.getDay()]})`;
-
-  document.getElementById("time").textContent=
-    d.toLocaleTimeString("ko-KR",{hour12:false});
-}
-
-function load(){
-  const saved=JSON.parse(localStorage.getItem(STORAGE_KEY)||"null");
-
-  const tasks=saved&&saved.length===7
-    ? saved
-    : ["","","","","","",""];
-
-  tasks.forEach((task,i)=>{
-    const textValue = (typeof task === "object" && task !== null) ? (task.text || "") : task;
-    const doneValue = (typeof task === "object" && task !== null) ? (task.done || false) : false;
-    createTask(i, textValue, doneValue);
-  });
-
-  updateProgress();
-}
-
-function save(){
-  const data=[...document.querySelectorAll(".task")].map(t=>({
-    text:t.querySelector("input[type=text]").value,
-    done:t.querySelector("input[type=checkbox]").checked
-  }));
-
-  localStorage.setItem(STORAGE_KEY,JSON.stringify(data));
-  updateProgress();
-}
-
-function createTask(i,text,done){
-  const row=document.createElement("div");
-  row.className="task"+(done?" done":"");
-
-  const check=document.createElement("input");
-  check.type="checkbox";
-  check.checked=done;
-
-  const input=document.createElement("input");
-  input.type="text";
-  input.placeholder=`할 일 ${i+1}`;
-  input.value=text;
-
-  check.addEventListener("change",()=>{
-    row.classList.toggle("done",check.checked);
-    save();
-  });
-
-  input.addEventListener("input",save);
-
-  row.append(check,input);
-  document.getElementById("list").appendChild(row);
-}
-
-function updateProgress(){
-  const checks=[
-    ...document.querySelectorAll('.task input[type="checkbox"]')
-  ];
-
-  const completed=checks.filter(c=>c.checked).length;
-  const percent=Math.round((completed/checks.length)*100);
-
-  document.getElementById("percent").textContent=percent+"%";
-  document.getElementById("progressBar").style.width=percent+"%";
+  // 1인당 금액 계산 (원 단위 절사 처리)
+  const perPerson = Math.floor(total / people);
   
-  document.getElementById("clear").style.display = (percent === 100) ? "block" : "none";
+  resultElement.innerText = `1인당 ${perPerson.toLocaleString()}원`;
 }
 
-function dailyMessage(){
-  const start=new Date(2026,0,1);
-  const now=new Date();
-  const day=Math.floor((now-start)/86400000);
-
-  document.getElementById("message").textContent=
-    "“"+messages[((day%messages.length)+messages.length)%messages.length]+"”";
+function contact(){
+  window.location.href="mailto:";
 }
-
-updateDateTime();
-setInterval(updateDateTime,1000);
-load();
-dailyMessage();
 </script>
 </body>
 </html>
