@@ -5,122 +5,56 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>이유민 | Mobile Card</title>
 <style>
-:root{
-  --main:#skyblue;
-}
+:root{--main:#87CEEB}
 *{box-sizing:border-box;margin:0;padding:0}
 body{
   font-family:Arial,"Noto Sans KR",sans-serif;
-  background:#f7f7f5;
-  color:var(--main);
-  min-height:100vh;
+  background:#f7fbfd;color:var(--main);min-height:100vh
 }
 .card{
-  min-height:100vh;
-  max-width:480px;
-  margin:auto;
-  padding:42px 28px 32px;
-  display:flex;
-  flex-direction:column;
+  min-height:100vh;max-width:480px;margin:auto;padding:42px 28px 32px;
+  display:flex;flex-direction:column
 }
 .top{padding-bottom:45px}
-.label{
-  font-size:15px;
-  font-weight:700;
-  letter-spacing:2px;
-  margin-bottom:18px;
-}
-h1{
-  font-size:48px;
-  line-height:1.05;
-  letter-spacing:-3px;
-  margin-bottom:18px;
-}
-.intro{
-  font-size:20px;
-  line-height:1.55;
-  font-weight:500;
-  letter-spacing:-1px;
-}
-.work{
-  flex:1;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  gap:14px;
-}
-.work-title{
-  font-size:15px;
-  font-weight:700;
-  letter-spacing:2px;
-  margin-bottom:8px;
-}
+.label{font-size:15px;font-weight:700;letter-spacing:2px;margin-bottom:18px}
+h1{font-size:48px;line-height:1.05;letter-spacing:-3px;margin-bottom:18px}
+.intro{font-size:20px;line-height:1.55;font-weight:500;letter-spacing:-1px}
+.work{flex:1;display:flex;flex-direction:column;justify-content:center;gap:14px}
+.work-title{font-size:15px;font-weight:700;letter-spacing:2px;margin-bottom:8px}
 .work-item{
-  border-top:2px solid var(--main);
-  padding:18px 4px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+  border-top:2px solid var(--main);padding:18px 4px;
+  display:flex;justify-content:space-between;align-items:center
 }
-.work-item span{
-  font-size:27px;
-  font-weight:700;
-  letter-spacing:-1.5px;
-}
-.arrow{
-  font-size:25px;
-}
+.work-item span{font-size:27px;font-weight:700;letter-spacing:-1.5px}
+.arrow{font-size:25px}
 .contact{
-  margin-top:38px;
-  width:100%;
-  padding:20px;
-  border:2px solid var(--main);
-  background:var(--main);
-  color:white;
-  font-size:20px;
-  font-weight:700;
-  cursor:pointer;
-  border-radius:14px;
+  margin-top:38px;width:100%;padding:20px;border:2px solid var(--main);
+  background:var(--main);color:white;font-size:20px;font-weight:700;
+  cursor:pointer;border-radius:14px
 }
 .contact:active{transform:scale(.98)}
 @media(max-width:360px){
-  h1{font-size:42px}
-  .intro{font-size:18px}
-  .work-item span{font-size:23px}
+  h1{font-size:42px}.intro{font-size:18px}.work-item span{font-size:23px}
 }
 </style>
 </head>
 <body>
 <main class="card">
-  <section class="top">
-    <div class="label">MOBILE BUSINESS CARD</div>
-    <h1>이유민</h1>
-    <p class="intro">경기대학교 경영학과 학생<br>아이디어를 서비스와 디자인으로 연결합니다.</p>
-  </section>
-
-  <section class="work">
-    <div class="work-title">WHAT I DO</div>
-    <div class="work-item">
-      <span>AI 서비스 기획</span>
-      <span class="arrow">→</span>
-    </div>
-    <div class="work-item">
-      <span>웹디자인</span>
-      <span class="arrow">→</span>
-    </div>
-    <div class="work-item">
-      <span>내면탐구</span>
-      <span class="arrow">→</span>
-    </div>
-  </section>
-
-  <button class="contact" onclick="contact()">문의하기</button>
+<section class="top">
+<div class="label">MOBILE BUSINESS CARD</div>
+<h1>이유민</h1>
+<p class="intro">경기대학교 경영학과 학생<br>아이디어를 서비스와 디자인으로 연결합니다.</p>
+</section>
+<section class="work">
+<div class="work-title">WHAT I DO</div>
+<div class="work-item"><span>AI 서비스 기획</span><span class="arrow">→</span></div>
+<div class="work-item"><span>웹디자인</span><span class="arrow">→</span></div>
+<div class="work-item"><span>내면탐구</span><span class="arrow">→</span></div>
+</section>
+<button class="contact" onclick="contact()">문의하기</button>
 </main>
-
 <script>
-function contact(){
-  window.location.href="mailto:";
-}
+function contact(){window.location.href="mailto:"}
 </script>
 </body>
 </html>
